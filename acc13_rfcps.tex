@@ -67,22 +67,21 @@ Rapid Flight Control Prototyping  - Steps Toward Cooperative Mission-Oriented Ca
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated by the need to enable cooperative missions of multiple unmanned aerial vehicles.
-Driven by the mission level objectives and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies
- and on the other hand by the advanced capabilities of embedded control and communication oriented software, the developed system enabled rapid design, onboard integration
-and in-flight verification of concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were
- recently developed and verified in flight by multiple cooperative UAVs. The paper concentrates on presenting the motivation and the conceptual design ideas which drive the evolution of
-constantly changing flight prototyping platform.
+The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated primarily by the need to enable cooperative missions of multiple unmanned aerial vehicles and by the desire to enhanced capabilities of human operators to oversee collaborative behaviors of multiple heterogeneous UAVs. Rather than solving a specific control task the evolution of the system is driven by higher level objectives. Namely, driven by the mission level goals and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies and on the other hand by the advanced capabilities of embedded control and communication oriented software, the developed system enabled rapid design, onboard integration and in-flight verification of concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were recently developed and verified in flight by multiple cooperative UAVs. The paper concentrates on presenting the motivation and the conceptual design ideas which drive the evolution of flight prototyping platform.
 \end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
+High operational utility of a single unmanned aerial vehicle (UAV) has been proven in many occasions in the recent years.  Single UAV has been primarily used in various ISR missions  that have been designed around the capabilities of a single platform, in turn the onboard instrumentation were adjusted to facilitate a specific ISR utility of interest.  When properly designed the aerial platform provided a single unique autonomous capability however capable of producing only a humongous amount of raw data  but intelligence content was still missing. The fact that the onboard intelligence is limited by various factors (probably it makes sense defining them here) resulted in the bottleneck of capabilities: the raw data is being streamed in real time however human analysts are not capable to process this amount of data in weeks after the mission. In order to solve the problem of producing intelligence rather then data a significant effort is made across the R\&D community to extend both the onboard intelligence that would enable initial raw data processing and the post-processing capabilities on the ground to enable the refined intelligence.
+
+Overall the vision of the intelligence bottleneck problem seems to be in the development of distributed platforms, both in the sense of distributed computational intelligence (onboard and ground ) as well as in distributing the airborne sensory capabilities that would leverage the capabilities of multiple complementary sensors. Enabling this level of collaborative autonomy, considering given state of the art in communication, computational power and power technologies,  requires significant advances in coordinated control, human-machine interaction, distributed data processing to name a few to be implemented onboard of mutiple collaborative UAVs.
+
 History of RFTPS at NPS.
 
 Specifics of NPS - R\&D of DOD specific mission and education.
 
-Challenges of the design and flight integration. The process is essentially a systems engineering where we have to keep in mind all available capabilities of Low level pices including  software and sensors
+Challenges of the design and flight integration. The process is essentially a systems engineering where we have to keep in mind all available capabilities of Low level pieces including  software and sensors
 and going up to the safety of flight experimentation.
 
 Current state of the art in software and hardware: CPU, Comm links, systems on a chip and OS-based designs.
@@ -95,9 +94,9 @@ Section IV - presents a number of flight experiments illustrating key capabiliti
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=120mm]{Pictures/Figure_01.pdf}
-	\caption{SLUGS integration with MATLAB/Simulink}
-	\label{fig:SLUGS_chain}
+	\includegraphics[width=40mm]{Pictures/Figure_01.pdf}
+	\caption{Targetting different computational platforms.}
+	\label{fig:TARGETTING_chain}
 \end{figure}
 
 \section{PROCEDURE FOR PAPER SUBMISSION}
