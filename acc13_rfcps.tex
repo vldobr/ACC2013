@@ -67,40 +67,38 @@ Rapid Flight Control Prototyping  - Steps Toward Cooperative Mission-Oriented Ca
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated by the need to enable cooperative missions of multiple unmanned aerial vehicles.
-Driven by the mission level objectives and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies
- and on the other hand by the advanced capabilities of embedded control and communication oriented software, the developed system enabled rapid design, onboard integration
-and in-flight verification of concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were
- recently developed and verified in flight by multiple cooperative UAVs. The paper concentrates on presenting the motivation and the conceptual design ideas which drive the evolution of
-constantly changing flight prototyping platform.
+The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated primarily by the need to enable cooperative missions of multiple unmanned aerial vehicles and by the desire to explore and enhance the capabilities of human operators to oversee collaborative behaviors of multiple heterogeneous UAVs. The evolution of the system is driven by the mission level objectives and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies and on the other hand by the advanced capabilities of embedded control and communication oriented software. As a result the developed system enables rapid design, onboard integration and in-flight verification of multiple UAVs collaborative concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were recently developed and verified in flight by multiple cooperative UAVs. The paper concentrates on presenting the motivation and the conceptual design ideas which drive the evolution of flight prototyping platform.
 \end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
-History of RFTPS at NPS.
+High operational utility of a single unmanned aerial vehicle (UAV) has been proven in recent years on many occasions.  Single UAV has been primarily used in various ISR missions  that have been designed around the capabilities of a single platform, in turn the onboard instrumentation were adjusted to facilitate a specific ISR utility of interest.  When properly designed the aerial platform provided a single unique autonomous capability however producing only a humongous amount of raw data  but intelligence content was still missing. The fact that the onboard intelligence is limited by various factors (probably it makes sense defining them here) resulted in the ``Large Data Problem'': a misleading exchange of quality for quantity. In real life scenarios this resulted in the raw data being streamed in close to real-time pace however the human analysts not being capable to process this amount of data in weeks after the mission. In response to this bottleneck of capabilities the R\&D community has focused its efforts on the faster processing and automated analysis. However, getting to the data faster, and utilizing more data through automated tools cannot solve some of the most difficult problems, among them is the precision and resolution of  data suitable for further use in predictive analytics. Thus, in order to eliminate the creation and need for large data sets, an intelligent high-precision and resolution capability for sensing and surveillance needs to be developed for time critical applications.
 
-Specifics of NPS - R\&D of DOD specific mission and education.
+%In order to solve the problem of producing intelligence rather then data a significant effort is made across the R\&D community to extend both the onboard %intelligence that would enable initial raw data processing and the post-processing capabilities on the ground to enable the refined intelligence.
 
-Challenges of the design and flight integration. The process is essentially a systems engineering where we have to keep in mind all available capabilities of Low level pices including  software and sensors
-and going up to the safety of flight experimentation.
+Overall, the vision of how to overcome the intelligence bottleneck and to develop a rich data set capability seems to be in the development of distributed platforms, both in the sense of distributed computational intelligence (onboard and ground ) as well as in distributing the airborne sensory capabilities that would leverage the features of multiple complementary sensors. Enabling this level of collaborative autonomy, considering given state of the art in communication, computational power and power technologies,  requires significant advances to be made in the areas of distributed mission planning, coordinated control, human-machine interaction, distributed data processing to name a few. Some of these capabilities need to be transitioned from the laboratory environment onboard of multiple collaborative UAVs and proven working in flight in a realistic setup. 
 
-Current state of the art in software and hardware: CPU, Comm links, systems on a chip and OS-based designs.
+As steps toward developing and implementing these capabilities in flight, the Unmanned Aerial Systems laboratory at NPS has been developing a Rapid Flight Control Prototyping system (RFCPS). Over years of evolution the RFCPS system has arrived to the state capable of implementing a number of the desired solutions in flight. The key capabilities of the system enable verifiable (repeatable) execution of the multiple heterogeneous UAVs cooperative missions, onboard data preprocessing, in-flight information streaming and sharing; some of them are running onboard while always providing the required level of collision avoidance  and flight safety in a multiple UAV sense. When a mission is planned ahead it creates a set of collaborative tasks accounting for the mission objective along with the capabilities of UAV platforms. When executed in flight by multiple UAVs the context-driven raw data preprocessing is followed by an intelligent reaction. Therefore, focused and context adaptive tasking that assumes collaboration among multiple players results in significantly lower volumes of high quality data.
 
-What are the objectives: Mission driven design that should not only prove a specific control concept but be feasible for education.
+%The developed hardware and software setup is capable of integrating a wide range of disparate data sources and computational methods and tools for %connecting such that the predesigned collaborative mission allows for the context-driven raw data preprocessing followed by an intelligent reaction.
 
-Outline of the paper: Section II - outlines two basic types of control prototyping systems {OS based and a system on a chip}, presents benefits and constraints.
-Section III - presents an architecture of our current system that includes xPC based basic design and flight verification and transitions to Linux based semi-industrial implementation.
-Section IV - presents a number of flight experiments illustrating key capabilities of the RFCPS.
+The RFCPS system is evolutionary built around capabilities of an advanced autopilot connected over a real-time communication link with a secondary set of controllers responsible for real-time flight critical, raw data pre-processing, and robust communication tasks. Rapid hardware prototyping that "mimics" CAD drawings in strong and lightweight materials, new microcontrollers and high speed and precision actuators enable quick integrating onboard of various sensors. Novel high-bandwidth wireless IP communication link allows beyond the LOS in-flight transmission of sensory information and the R\&D telemetry without any need to utilize the primary CC link. New software solutions implementing advanced cooperative GNC algorithms, robust communication messaging and onboard sensory data processing enable cooperative flight of multiple heterogeneous UAVs and their interaction with human operators. Thus, the systems engineering effort of designing and integrating various components resulted in a system capable to rapidly prototype a mission of unknown complexity.
+
+The paper  addresses  the underlying design concepts implemented by the RFCPS system, the presentation focuses on architectural ideas and the results achieved by the setup. Thus, Section II of the paper outlines two basic types of rapid control prototyping systems that were initiated at the UAV lab: they include OS-based and a System on a Chip (SOC) designs. While the latter one is briefly presented, the primary focus of this publication is given to the OS-based architectures. Illustrating the Model Based Design (MBD) paradigm and the rapid verifiable code generation that are provided by the Simulink and Simulink Coder tools, the xPC-based design is presented as a first step in transitioning a theoretical concept to real flight.  The steps of transitioning the same solution (already flown) to the Linux-based semi-industrial implementation are presented next. Chapter IV demonstrates a set of multiple cooperative UAV missions that illustrate the developed solutions in flight. 
+
+\section{RFCPS Architecture}
+
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=120mm]{Pictures/Figure_01.pdf}
-	\caption{SLUGS integration with MATLAB/Simulink}
-	\label{fig:SLUGS_chain}
+	\includegraphics[width=40mm]{Pictures/Figure_01.pdf}
+	\caption{Targetting different computational platforms.}
+	\label{fig:TARGETTING_chain}
 \end{figure}
 
-\section{PROCEDURE FOR PAPER SUBMISSION}
+\section{RFCPS Architecture}
+
 
 \subsection{Selecting a Template (Heading 2)}
 
