@@ -23,9 +23,10 @@
 %\usepackage{times} % assumes new font selection scheme installed
 %\usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{graphicx} % for pdf, bitmapped graphics files
 
 \title{\LARGE \bf
-Rapid Fligt Control Prototyping  - Steps Toward Cooperative Mission-Oriented Capabilities}
+Rapid Flight Control Prototyping  - Steps Toward Cooperative Mission-Oriented Capabilities}
 
 %\author{ \parbox{3 in}{\centering Huibert Kwakernaak*
 %         \thanks{*Use the $\backslash$thanks command to put information here}\\
@@ -66,7 +67,7 @@ Rapid Fligt Control Prototyping  - Steps Toward Cooperative Mission-Oriented Cap
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated by the need to enable cooperative missions of multiple unmanned aerial vehicles. 
+The paper describes the latest advancements of the Rapid Flight Control Prototyping system that were motivated by the need to enable cooperative missions of multiple unmanned aerial vehicles.
 Driven by the mission level objectives and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies
  and on the other hand by the advanced capabilities of embedded control and communication oriented software, the developed system enabled rapid design, onboard integration
 and in-flight verification of concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were
@@ -81,7 +82,7 @@ History of RFTPS at NPS.
 
 Specifics of NPS - R\&D of DOD specific mission and education.
 
-Challenges of the design and flight integration. The process is essentially a systems engineering where we have to keep in mind all available capabilities of Low level pices including  software and sensors 
+Challenges of the design and flight integration. The process is essentially a systems engineering where we have to keep in mind all available capabilities of Low level pices including  software and sensors
 and going up to the safety of flight experimentation.
 
 Current state of the art in software and hardware: CPU, Comm links, systems on a chip and OS-based designs.
@@ -91,6 +92,13 @@ What are the objectives: Mission driven design that should not only prove a spec
 Outline of the paper: Section II - outlines two basic types of control prototyping systems {OS based and a system on a chip}, presents benefits and constraints.
 Section III - presents an architecture of our current system that includes xPC based basic design and flight verification and transitions to Linux based semi-industrial implementation.
 Section IV - presents a number of flight experiments illustrating key capabilities of the RFCPS.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=120mm]{Pictures/Figure_01.pdf}
+	\caption{SLUGS integration with MATLAB/Simulink}
+	\label{fig:SLUGS_chain}
+\end{figure}
 
 \section{PROCEDURE FOR PAPER SUBMISSION}
 
@@ -189,13 +197,13 @@ Three & Four\\
        magnetic core versus DC bias magnetic field}
       \label{figurelabel}
    \end{figure}
-   
+
 
 Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity “Magnetization”, or “Magnetization, M”, not just “M”. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write “Magnetization (A/m)” or “Magnetization {A[m(1)]}”, not just “A/m”. Do not label axes with a ratio of quantities and units. For example, write “Temperature (K)”, not “Temperature/K.”
 
 \section{CONCLUSIONS}
 
-A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
+A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions.
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -248,9 +256,9 @@ References are important to the reader; therefore, each citation must be complet
 \bibitem{c15} W. D. Doyle, “Magnetization reversal in films with biaxial anisotropy,” in 1987 Proc. INTERMAG Conf., pp. 2.2-1–2.2-6.
 \bibitem{c16} G. W. Juette and L. E. Zeffanella, “Radio noise currents n short sections on bundle conductors (Presented Conference Paper style),” presented at the IEEE Summer power Meeting, Dallas, TX, June 22–27, 1990, Paper 90 SM 690-0 PWRS.
 \bibitem{c17} J. G. Kreifeldt, “An analysis of surface-detected EMG as an amplitude-modulated noise,” presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
-\bibitem{c18} J. Williams, “Narrow-band analyzer (Thesis or Dissertation style),” Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993. 
+\bibitem{c18} J. Williams, “Narrow-band analyzer (Thesis or Dissertation style),” Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993.
 \bibitem{c19} N. Kawasaki, “Parametric study of thermal and chemical nonequilibrium nozzle flow,” M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
-\bibitem{c20} J. P. Wilkinson, “Nonlinear resonant circuit devices (Patent style),” U.S. Patent 3 624 12, July 16, 1990. 
+\bibitem{c20} J. P. Wilkinson, “Nonlinear resonant circuit devices (Patent style),” U.S. Patent 3 624 12, July 16, 1990.
 
 
 
