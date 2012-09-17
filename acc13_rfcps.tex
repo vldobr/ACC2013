@@ -28,21 +28,6 @@
 \title{\LARGE \bf
 Rapid Flight Control Prototyping  - Steps Toward Cooperative Mission-Oriented Capabilities}
 
-%\author{ \parbox{3 in}{\centering Huibert Kwakernaak*
-%         \thanks{*Use the $\backslash$thanks command to put information here}\\
-%         Faculty of Electrical Engineering, Mathematics and Computer Science\\
-%         University of Twente\\
-%         7500 AE Enschede, The Netherlands\\
-%         {\tt\small h.kwakernaak@autsubmit.com}}
-%         \hspace*{ 0.5 in}
-%         \parbox{3 in}{ \centering Pradeep Misra**
-%         \thanks{**The footnote marks may be inserted manually}\\
-%        Department of Electrical Engineering \\
-%         Wright State University\\
-%         Dayton, OH 45435, USA\\
-%         {\tt\small pmisra@cs.wright.edu}}
-%}
-
 \author{Vladimir Dobrokhodov$^{1}$, Kevin Jones$^{2}$, and Isaac Kaminer$^{3}$% <-this % stops a space
 \thanks{$^{1}$V.N. Dobrokhodov is a Research Associate Professor at the Department  of Mechanical and Aerospace Engineering,
         Naval Postgraduate School, Monterey, CA, 93943
@@ -69,8 +54,6 @@ Rapid Flight Control Prototyping  - Steps Toward Cooperative Mission-Oriented Ca
 \begin{abstract}
 The paper describes the latest advancements in the development of the Rapid Flight Control Prototyping system that were motivated primarily by the need to enable cooperative missions of multiple unmanned aerial vehicles and by the desire to explore and enhance the capabilities of human operators to oversee the collaborative behaviors of multiple heterogeneous UAVs. The evolution of the system is driven by the mission level objectives and supported on one hand by the progress in miniature sensors, computational power, communication and portable energy technologies and on the other hand by the advanced capabilities of embedded control and communication oriented software. As a result the developed system enables rapid design, onboard integration and in-flight verification of multiple UAVs collaborative concepts that seemed impossible just a couple of years ago. Advantages of the designed system are illustrated by a number of scenarios that were recently developed and verified in flight by multiple cooperative UAVs. The paper concentrates on presenting the motivation and the conceptual design ideas which drive the evolution of flight prototyping platform.
 \end{abstract}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 High operational utility of a single unmanned aerial vehicle (UAV) has been proven in recent years on many occasions.  Single UAV has been primarily used in various ISR missions  that have been designed around the capabilities of a single platform, in turn the onboard instrumentation were adjusted to facilitate a specific ISR utility of interest.  When properly designed the aerial platform provided a single unique autonomous capability however producing only a humongous amount of raw data  but intelligence content was still missing. The fact that the onboard intelligence is limited by various factors (probably it makes sense defining them here) resulted in the ``Large Data Problem'': a misleading exchange of quality for quantity. In real life scenarios this resulted in the raw data being streamed in close to real-time pace however the human analysts not being capable to process this amount of data in weeks after the mission. In response to this bottleneck of capabilities the R\&D community has focused its efforts on the faster processing and automated analysis. However, getting to the data faster, and utilizing more data through automated tools cannot solve some of the most difficult problems, among them is the precision and resolution of  data suitable for further use in predictive analytics. Thus, in order to eliminate the creation and need for large data sets, an intelligent high-precision and resolution capability for sensing and surveillance needs to be developed for time critical applications.
@@ -105,7 +88,7 @@ When a design task requires developing a standalone solution (feedback controlle
 
 On the other hand, the specifics of R\&D work frequently require modifications of the underlying algorithms. Thus the ``xPC embedded target'' option, provided by the Simulink Coder is one of the best solutions  enabling frequent and rapid code modification and reintegration. An xPC target environment is a hard real-time operating system that executes the real time code (task) that is built by the coder supporting a number of computational platforms. The solution provides various services typical for an operating system while supporting preemptive mechanism  for real time tasks scheduling and execution. The RFCPS system utilizes this option for standard \emph{Intel}x$86$ processor. While the xPC embedded target option is very flexible, it still requires ``manual'' coding in a number of occasions. Since it is hard to expect that every new piece of hardware has the same communication protocol and is supported by Mathwork's, one of the primary needs for manual coding does arise when a new communication protocol need to be implemented. Simulink coder enables integration of customized algorithms by means of s-functions; the process is time consuming and error prone, however it is well documented and straightforward. 
 
-The desire to focuse on rapid and verifiable flight implementation of new theoretical results and well-developed legacy codes, given in a variety of programming languages, while spending less time on the code development and re-integration resulted in targeting a new computational platform. The high efficiency of Linux operating system and high computational power of modern miniature computers lead to integrating this system into flight experimentation. Furthermore, the objectives of collaborative missions and distributed computation require integration of messaging and synchronization mechanisms that are robust to network failures and communications dropouts. A number of industrial-grade software packages that enable communication across multiple networking nodes while explicitly addressing the messaging protocols and algorithms that are resilient to faults across local and wide area networks have been recently developed, see [SPREAD],[MOOS]. Therefore, the most recent modification of the RFCPS included the implementation of Simulink/Coder built algorithms into the Linux operating system. The capabilities of Simulink to utilize communication buses and features of the Simulink coder allow generating C/C++ libraries that are directly suitable for compilation and execution on Linux. Software API of the SPREAD toolkit enables efficient messaging across various tasks executed across multiple wirelessly connected UAVs. No manual modification of the library code is necessary, however the tasks scheduling file (main) needs to explicitly define the sampling rate of each of the code components and the messaging mechanism. Special consideration is now given to scheduling of the flight-critical and not critical tasks. One of the initially developed scheduling solution utilizes a simple function call to the CPU time clock. Comparing the clock time with the required execution rate enabled efficient implementation of the required sampling of various tasks (daemons) in Linux. The most recent solution that adopts the same auto-generated code and is based on more rigorous real time scheduling capabilities of ROS/OROCOS operating system [ROS],[OROCOS] has been also tested in the laboratory environment.
+The desire to focus on rapid and verifiable flight implementation of new theoretical results and well-developed legacy codes, given in a variety of programming languages, while spending less time on the code development and re-integration resulted in targeting a new computational platform. The high efficiency of Linux operating system and high computational power of modern miniature computers lead to integrating this system into flight experimentation. Furthermore, the objectives of collaborative missions and distributed computation require integration of messaging and synchronization mechanisms that are robust to network failures and communications dropouts. A number of industrial-grade software packages that enable communication across multiple networking nodes while explicitly addressing the messaging protocols and algorithms that are resilient to faults across local and wide area networks have been recently developed, see [SPREAD],[MOOS]. Therefore, the most recent modification of the RFCPS included the implementation of Simulink/Coder built algorithms into the Linux operating system. The capabilities of Simulink to utilize communication buses and features of the Simulink coder allow generating C/C++ libraries that are directly suitable for compilation and execution on Linux. Software API of the SPREAD toolkit enables efficient messaging across various tasks executed across multiple wirelessly connected UAVs. No manual modification of the library code is necessary, however the tasks scheduling file (main) needs to explicitly define the sampling rate of each of the code components and the messaging mechanism. Special consideration is now given to scheduling of the flight-critical and not critical tasks. One of the initially developed scheduling solution utilizes a simple function call to the CPU time clock. Comparing the clock time with the required execution rate enabled efficient implementation of the required sampling of various tasks (daemons) in Linux. The most recent solution that adopts the same auto-generated code and is based on more rigorous real time scheduling capabilities of ROS/OROCOS operating system [ROS],[OROCOS] has been also tested in the laboratory environment.
 
 \subsection{RFCPS Architecture}
 
@@ -126,104 +109,62 @@ The last significant onboard component is the power management system. Depending
 The ground segment of RFCPS is comprised of two parts; the first part is a standalone ground control station (GCS), an operator interface (OI) computer and a command and control (CC) link provided by the autopilot manufacturer, and the second part is the research environment that is customized according to the needs of a specific mission under development. The fact that the onboard software is separated into flight safety critical and not flight critical defines the configuration of the R\&D development environment. As an example, the sensory data processing algorithms that are not flight critical are run on a data PC; two primary OS systems are currently used - the Ubuntu Linux and ROS operating systems. The flight critical tasks are run under either xPC target or the Linux/ROS(OROCOS) environments. Although the hardware of both PC104 computers is identical (for convenience) the task based separation is preserved to guarantee safety of flight experimentation and reliability of the experimental results.
 
 To preserve the rigor of theoretical development while transitioning the results in flight the core of cooperative flight control algorithms is developed utilizing advanced capabilities of the MatLab/Simulink environment. The Model Based Design (MBD) paradigm supported by a number of code verification and automatic code generation tools is what makes the transition very reliable. The algorithms are designed and verified in Simulink with minimal or no use of low level programming. When debugged, the xPC target environment is used first to enable the Hardware In the Loop (HIL) simulation; Piccolo AP is well-supported with this functionality. Therefore, integrating and verifying the newly built algorithms becomes straightforward; at the same time a number of data processing scripts can be built ahead of time to facilitate quick flight data analysis. After confirming the desired performance of cooperative mission in HIL, the same xPC based code is transformed into real time executable and then flown in the air. 
-After a series of flight experiments in different flight conditions the algorithms and the operational environment mature enough to allow building a set of standalone libraries for future Linux or ROS integration. The volume limitation of the paper does not allow to describe all the benefits of this new direction. However it is sufficient to note that the same development concept is  followed and the same code that is built by the Simulink coder is used to transition the flight validated solution into a highly reliable Linux/ROS based computational platform. An interested reader is referred to Ref for mored details.
+After a series of flight experiments in different flight conditions the algorithms and the operational environment mature enough to allow building a set of standalone libraries for future Linux or ROS integration. The volume limitation of the paper does not allow to describe all the benefits of this new direction. However it is sufficient to note that the same development concept is  followed and the same code that is built by the Simulink coder is used to transition the flight validated solution into a highly reliable Linux/ROS based computational platform. An interested reader is referred to Ref [ROS/OROCOS] for mored details.
 
 \section{Experimental Results}
 
-Before you begin to format your paper, first write and save the content as a separate text file. Keep your text and graphic files separate until after the text has been formatted and styled. Do not use hard tabs, and limit use of hard returns to only one return at the end of a paragraph. Do not add any kind of pagination anywhere in the paper. Do not number text heads-the template will do that for you.
+To illustrate the benefits of RFCPS system that enable cooperative autonomous aerial missions this section  reviews two most recent projects: the coordinated road search by multiple UAVs and the onboard integration of cognitive automation system in support of dynamic mission planning and execution. Each of these experiments highlights the key benefits of the OS-based approach.
 
-Finally, complete content and organizational editing before formatting. Please take note of the following items when proofreading spelling and grammar:
+\subsection{Coordinated Road Search by Multiple UAVs} 
 
-\subsection{Coordinated Road Search by Multiple UAVs} Define abbreviations and acronyms the first time they are used in the text, even after they have been defined in the abstract. Abbreviations such as IEEE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title or heads unless they are unavoidable.
-
-\subsection{Cognitive Autonamition}
-
-\subsection{Autonomous Thermal Soaring Gliders}
-
-\begin{itemize}
-
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as Ò3.5-inch disk driveÓ.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ÒWb/m2Ó or Òwebers per square meterÓ, not Òwebers/m2Ó.  Spell out units when they appear in text: Ò. . . a few henriesÓ, not Ò. . . a few HÓ.
-\item Use a zero before decimal points: Ò0.25Ó, not Ò.25Ó. Use Òcm3Ó, not ÒccÓ. (bullet list)
-
-\end{itemize}
-
-
-\subsection{Conclusion}
-
-The equations are an exception to the prescribed specifications of this template. You will need to determine whether or not your equation should be typed using either the Times New Roman or the Symbol font (please no other font). To create multileveled equations, it may be necessary to treat the equation as a graphic and insert it into the text after your paper is styled. Number equations consecutively. Equation numbers, within parentheses, are to position flush right, as in (1), using a right tab stop. To make your equations more compact, you may use the solidus ( / ), the exp function, or appropriate exponents. Italicize Roman symbols for quantities and variables, but not Greek symbols. Use a long dash rather than a hyphen for a minus sign. Punctuate equations with commas or periods when they are part of a sentence, as in
-
-$$
-\alpha + \beta = \chi \eqno{(1)}
-$$
-
-Note that the equation is centered using a center tab stop. Be sure that the symbols in your equation have been defined before or immediately following the equation. Use Ò(1)Ó, not ÒEq. (1)Ó or Òequation (1)Ó, except at the beginning of a sentence: ÒEquation (1) is . . .Ó
-
-\subsection{Some Common Mistakes}
-\begin{itemize}
-
-
-\item The word ÒdataÓ is plural, not singular.
-\item The subscript for the permeability of vacuum ?0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter ÒoÓ.
-\item In American English, commas, semi-/colons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-\item A graph within a graph is an ÒinsetÓ, not an ÒinsertÓ. The word alternatively is preferred to the word ÒalternatelyÓ (unless you really mean something that alternates).
-\item Do not use the word ÒessentiallyÓ to mean ÒapproximatelyÓ or ÒeffectivelyÓ.
-\item In your paper title, if the words Òthat usesÓ can accurately replace the word ÒusingÓ, capitalize the ÒuÓ; if not, keep using lower-cased.
-\item Be aware of the different meanings of the homophones ÒaffectÓ and ÒeffectÓ, ÒcomplementÓ and ÒcomplimentÓ, ÒdiscreetÓ and ÒdiscreteÓ, ÒprincipalÓ and ÒprincipleÓ.
-\item Do not confuse ÒimplyÓ and ÒinferÓ.
-\item The prefix ÒnonÓ is not a word; it should be joined to the word it modifies, usually without a hyphen.
-\item There is no period after the ÒetÓ in the Latin abbreviation Òet al.Ó.
-\item The abbreviation Òi.e.Ó means Òthat isÓ, and the abbreviation Òe.g.Ó means Òfor exampleÓ.
-
-\end{itemize}
-
-
-\section{USING THE TEMPLATE}
-
-Use this sample document as your LaTeX source file to create your document. Save this file as {\bf root.tex}. You have to make sure to use the cls file that came with this distribution. If you use a different style file, you cannot expect to get required margins. Note also that when you are creating your out PDF file, the source file is only part of the equation. {\it Your \TeX\ $\rightarrow$ PDF filter determines the output file size. Even if you make all the specifications to output a letter file in the source - if you filter is set to produce A4, you will only get A4 output. }
-
-It is impossible to account for all possible situation, one would encounter using \TeX. If you are using multiple \TeX\ files you must make sure that the ``MAIN`` source file is called root.tex - this is particularly important if your conference is using PaperPlaza's built in \TeX\ to PDF conversion tool.
-
-\subsection{Headings, etc}
-
-Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named ÒHeading 1Ó, ÒHeading 2Ó, ÒHeading 3Ó, and ÒHeading 4Ó are prescribed.
-
-\subsection{Figures and Tables}
-
-Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation ÒFig. 1Ó, even at the beginning of a sentence.
-
-\begin{table}[h]
-\caption{An Example of a Table}
-\label{table_example}
-\begin{center}
-\begin{tabular}{|c||c|}
-\hline
-One & Two\\
-\hline
-Three & Four\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
+The objective of this project was to enable a minimally trained user to utilize a number of  sensors installed onboard of heterogeneous UAVs without any need for him to be trained in flying UAVs. The concept of operation assumes that one path is generated for a number of sensors so that when they are flown autonomously the intersection of their fields of view is maximized. It is assumed that sensors are complementary( for example they can be electro-optical and infrared) and might have different installation onboard of UAV; body-fixed, stabilized only in roll angle or both - roll and pitch angles. Since the sensors have different degrees of freedom and the UAVs have different flight dynamic limitations, the only method of enabling the multiple sensors to coordinate their fields of view is by enabling tight cooperation of the aerial platforms. Therefore, as soon as the sensor path is extracted by the user utilizing a digital map (scribble over the map), it is parameterized by polynomials and submitted onboard of airborne UAVs. The paths of each UAV and the desired nominal velocity profiles are then computed while accounting for the desired resolution of the sensors data, the UAVs flight dynamic constraints and the gimbals limitations. The UAVs are then assigned the corresponding paths with different velocity profiles; this paths define the shape of the search segment. To execute the search the UAVs should start from their current flight state (initial conditions) and perform a coordinated arrival to the beginning of the search segment. This arrival path and the velocity profiles are calculated onboard taking into account the flight dynamics  and the collision avoidance constraints.
 
    \begin{figure}[thpb]
       \centering
-      \framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
-}}
+      \framebox{\parbox{3in}{Coordinated road search by multiple UAVs.}}
       %\includegraphics[scale=1.0]{figurefile}
-      \caption{Inductance of oscillation winding on amorphous
-       magnetic core versus DC bias magnetic field}
-      \label{figurelabel}
+      \caption{Coordinated road search mission}
+      \label{CPF_concept}
    \end{figure}
 
+The concept [CPF] that is implemented by each UAV during the mission is based on the explicit separation of time and space. The  path is parameterized by algebraic polynomials, therefore the number of parameters defining the path is finite and depends on the class and the degree of the chosen polynomial representation. Supported by robust communication protocols this approach enables feasible for real time execution path generation and simple and inexpensive communication of the intent and current state of each UAV that is critical especially for the collision avoidance, see Fig.~\ref{fig:CPF}. The path following control [CPF] for fixed wing UAVs is enabled by using attitude control commands: pitch and yaw rates are the primary control signals utilized by the nonlinear control law. If the UAVs were following the assigned path and the velocity profiles precisely then there would not be any need for tight flight coordination; the coordination is already accounted at the stage of the path and velocity generation. However each UAV is subject to a number of disturbances resulting in the path following and coordination errors. To cancel the coordination errors, the  velocity of each UAV is controlled according to its relative position error on the path that is calculated based on the position of coordinated UAVs continuously transmitted over the wireless network. The developed algorithm is robust to network dropouts and allows tight coordination of a number of UAVs flying in a realistic environment. Besides the coordination and path following algorithms the onboard flight-critical computer runs the  $L_1$ adaptive control law implemented as output feedback augmentation loop around the nominal autopilot; the overall coordinated path following control architecture is presented in Fig.~\ref{fig:CPF}.  Implementing the $L_1$ adaptive controller onboard provides guaranteed performance of the entire multiple UAV system in a wide range of operational conditions with no need for retuning of the individual systems component, an interested reader is referred to [$L_1$ CPF] for more details.
 
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity ÒMagnetizationÓ, or ÒMagnetization, MÓ, not just ÒMÓ. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write ÒMagnetization (A/m)Ó or ÒMagnetization {A[m(1)]}Ó, not just ÒA/mÓ. Do not label axes with a ratio of quantities and units. For example, write ÒTemperature (K)Ó, not ÒTemperature/K.Ó
+   \begin{figure}[thpb]
+      \centering
+      %\framebox{\parbox{3in}{Control architecture of the cooperative mission.}}
+      \includegraphics[width=80mm]{Pictures/Figure_04.pdf}
+      \caption{Control architecture of the cooperative mission}
+      \label{fig:CPF}
+   \end{figure}
 
-\section{CONCLUSIONS}
+The desired performance of airborne sensors in this scenario is enabled by the ability to execute onboard the path following and coordination algorithms in hard real time and the imagery and video processing tasks executed as non-real time critical processes. Furthermore, while transmitting the overlapped video and imagery over the wireless network, the data pre-processing algorithms  solve a number of typical tasks such as extraction of objects of interest (cars, people, buildings e.t.c) and their geo-referencing. Therefore, by enabling coordination not only the content of sensory data becomes rich and meaningful but the operator is alerted when an object of interest is detected. The overall load of the operator thus is significantly lower. 
 
-A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions.
+\subsection{Cognitive Automation in Support of Mission Planning and Execution} 
+
+The objective of this project was to assist a single operator in designing and executing a multiple UAVs mission by combining the high-level mission planning algorithms with cooperative path following of a number of UAVs. As a first step in achieving this goal the project and the experimental setup concentrated on a single UAV mission while the rest of the fleet being modeled on the ground. However, the overall cognitive decision making, control and communication solutions were design to support a multi-vehicle configuration. 
+
+In this scope, the CoCAMPUS (Cooperative Cognitive Automation through Mathematically optimized Path-Following of UAVs) project [Schulte] was conducted to explore how to properly support a single operator in mission-design and flight-control to enhance the overall multiple UAVs system performance. An exemplary mission was chosen based on a simplified Air-Attack scenario that also including static threats at unknown locations; it was assumed that the UAVs will discover the static surface to air missile (SAM) sites during the mission execution. The Cognitive System Architecture (COSA2) is designed and integrated onboard  to dynamically implement cognitive automation behavior on the basis of current understanding of tactical situation and explicit knowledge models,  while deriving implicit cost-functions and defining the path optimization constraints adaptively during the flight.
+
+Artificial Cognitive Units (ACUs) onboard the UAV are used to implement task-based guidance and mimic human rationality to some extent, forming so-called cognitive automation, processing information mostly on a symbolic level. The ACUâ€™s behavior is completely defined by its goal,which is explicitly represented as knowledge in its implementation.The ACU allows knowledge-based implementation such as decision making and planning depending on the available tactical observations and understanding of the current situation. It also offers semi-autonomous capabilities, in a sense that the ACU pursues a given task autonomously using the automation built inside the UAVâ€™s system.
+
+The objective of a single human operator in the Air-Attack mission is to perform a combat air patrol (CAP) and, upon detection of a ground vehicle and its identification, to approach and attack the target. The no-fly zones as well as static threats in form of SAM-sites are to be avoided as they are detected. The ground vehicle is located on a road inside the mission area and its coordinates are given by an external reconnaissance system cooperating with the operator. The final approach to the target by a UAV should be performed at an optimal course angle providing the highest effectiveness of released weapon; during the experimentation the effectiveness was evaluated by taking a picture at the calculated release point and analyzing if the target was present in the camera frame. 
+
+Figure~\ref{fig:CAP_mission} presents the mission progress during the CoCAMPUS flight trials. The flight path can be separated into two consecutive segments. First, the operator chose and commanded the desired CAP â€œCAP Aâ€ to the ACU in point 1. Upon arriving and orbiting at the CAP (point 2) and reevaluating the situation, the operator tasked the ACU to attack the vehicle. The UAV started the task by dynamically calculating an optimal approach to the road (point 3) before attacking the target vehicle in point 4. Upon taking a picture, the ACU commanded to circle the targetâ€™s position. At all times during the mission, the ACU monitored the UAVâ€™s systems and flight states and matched them with its own projection of future environment states, to ensure the fulfillment of the task-queue and possibly counteract aberrations. The path generation module took into account all given threats and dynamic constraints to ensure a safe, feasible path and to allow the best approach to the target. 
+
+   \begin{figure}[thpb]
+      \centering
+      %\framebox{\parbox{3in}{Control architecture of the cooperative mission.}}
+      \includegraphics[width=86mm]{Pictures/CAP_mission.pdf}
+      \caption{Air-Attack mission results with overlaid tactical elements and SAM sites.}
+      \label{fig:CAP_mission}
+   \end{figure}
+
+The tasks of cognitive automation as well as flight critical control have been implemented onboard of single CPU running Linux operating system. The coordinated path following task has been designed as in previous experiment in Simulink and the code was auto-generated and recompiled in Linux. The flight control law was manually scheduled at $100 Hz$ rate while the communication with Piccolo autopilot run at $50 Hz$. The cognitive automation tasks were running natively in Linux as a background process.
+
+Flight tests were performed over three consecutive days and have shown very promising results. These real-world flight trials have proven the feasibility and the benefits of the presented approach and the developed hardware architecture. The goal-driven ACU enhances the system robustness in mission execution and supports the human operator, resulting in a reduced workload.
+
+\subsection{Conclusion}
+The paper presented the most recent architectural modifications of the Rapid Flight Control Prototyping system that specifically address the cooperative missions of multiple unmanned aerial vehicles. The design of the RFCPS is driven by the mission level objectives and is enabled on the one hand by the progress in miniature sensors, computational power, communication and portable energy technologies and on the other hand by the advanced capabilities of embedded control and communication oriented software. As a result, the RFCPS enables rapid "prototyping of cooperative mission" of multiple UAVs that seemed impossible just a couple of years ago. 
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -234,51 +175,36 @@ A conclusion section is not required. Although a conclusion may review the main 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section*{APPENDIX}
-
-%Appendixes should appear before the acknowledgment.
-
 \section*{ACKNOWLEDGMENT}
 
-The preferred spelling of the word ÒacknowledgmentÓ in America is without an ÒeÓ after the ÒgÓ. Avoid the stilted expression, ÒOne of us (R. B. G.) thanks . . .Ó  Instead, try ÒR. B. G. thanksÓ. Put sponsor acknowledgments in the unnumbered footnote on the first page.
+Over the year of the RFCPS development the authors were funded in part by Air Force Office of Scientific Research under Contract No. FA9550â€“09â€“1â€“0265 and FA9550-05-1-0157; The National Air and Space Adminis- tration under Contracts NNX08BA64A, NNX08BA65A, NNX08AB97A, NNX08AC81A, and NNL08AA12I; ARO under Contract No.W911NF-06-1-0330, the USSOCOM/NPS Field Expe- rimentation Cooperative, the Office of Naval Research under Contract N00014-05-1-0828. All authors received support from the USSOCOM/NPS Field Experimentation Cooperative.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
-
-
 
 \begin{thebibliography}{99}
 
-\bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
-\bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123Ð135.
+\bibitem{c1} G. O. Young, â€œSynthetic structure of industrial plastics (Book style with paper title and editor),â€ 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15â€“64.
+\bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123â€“135.
 \bibitem{c3} H. Poor, An Introduction to Signal Detection and Estimation.   New York: Springer-Verlag, 1985, ch. 4.
-\bibitem{c4} B. Smith, ÒAn approach to graphs of linear forms (Unpublished work style),Ó unpublished.
-\bibitem{c5} E. H. Miller, ÒA note on reflector arrays (Periodical styleÑAccepted for publication),Ó IEEE Trans. Antennas Propagat., to be publised.
-\bibitem{c6} J. Wang, ÒFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleÑSubmitted for publication),Ó IEEE J. Quantum Electron., submitted for publication.
+\bibitem{c4} B. Smith, â€œAn approach to graphs of linear forms (Unpublished work style),â€ unpublished.
+\bibitem{c5} E. H. Miller, â€œA note on reflector arrays (Periodical styleâ€”Accepted for publication),â€ IEEE Trans. Antennas Propagat., to be publised.
+\bibitem{c6} J. Wang, â€œFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleâ€”Submitted for publication),â€ IEEE J. Quantum Electron., submitted for publication.
 \bibitem{c7} C. J. Kaufman, Rocky Mountain Research Lab., Boulder, CO, private communication, May 1995.
-\bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ÒElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),Ó IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740Ð741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
+\bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, â€œElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),â€ IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740â€“741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
 \bibitem{c9} M. Young, The Techincal Writers Handbook.  Mill Valley, CA: University Science, 1989.
-\bibitem{c10} J. U. Duncombe, ÒInfrared navigationÑPart I: An assessment of feasibility (Periodical style),Ó IEEE Trans. Electron Devices, vol. ED-11, pp. 34Ð39, Jan. 1959.
-\bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, ÒA clustering technique for digital communications channel equalization using radial basis function networks,Ó IEEE Trans. Neural Networks, vol. 4, pp. 570Ð578, July 1993.
-\bibitem{c12} R. W. Lucky, ÒAutomatic equalization for digital communication,Ó Bell Syst. Tech. J., vol. 44, no. 4, pp. 547Ð588, Apr. 1965.
-\bibitem{c13} S. P. Bingulac, ÒOn the compatibility of adaptive controllers (Published Conference Proceedings style),Ó in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8Ð16.
-\bibitem{c14} G. R. Faulhaber, ÒDesign of service systems with priority reservation,Ó in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3Ð8.
-\bibitem{c15} W. D. Doyle, ÒMagnetization reversal in films with biaxial anisotropy,Ó in 1987 Proc. INTERMAG Conf., pp. 2.2-1Ð2.2-6.
-\bibitem{c16} G. W. Juette and L. E. Zeffanella, ÒRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),Ó presented at the IEEE Summer power Meeting, Dallas, TX, June 22Ð27, 1990, Paper 90 SM 690-0 PWRS.
-\bibitem{c17} J. G. Kreifeldt, ÒAn analysis of surface-detected EMG as an amplitude-modulated noise,Ó presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
-\bibitem{c18} J. Williams, ÒNarrow-band analyzer (Thesis or Dissertation style),Ó Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993.
-\bibitem{c19} N. Kawasaki, ÒParametric study of thermal and chemical nonequilibrium nozzle flow,Ó M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
-\bibitem{c20} J. P. Wilkinson, ÒNonlinear resonant circuit devices (Patent style),Ó U.S. Patent 3 624 12, July 16, 1990.
+\bibitem{c10} J. U. Duncombe, â€œInfrared navigationâ€”Part I: An assessment of feasibility (Periodical style),â€ IEEE Trans. Electron Devices, vol. ED-11, pp. 34â€“39, Jan. 1959.
+\bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, â€œA clustering technique for digital communications channel equalization using radial basis function networks,â€ IEEE Trans. Neural Networks, vol. 4, pp. 570â€“578, July 1993.
+\bibitem{c12} R. W. Lucky, â€œAutomatic equalization for digital communication,â€ Bell Syst. Tech. J., vol. 44, no. 4, pp. 547â€“588, Apr. 1965.
+\bibitem{c13} S. P. Bingulac, â€œOn the compatibility of adaptive controllers (Published Conference Proceedings style),â€ in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8â€“16.
+\bibitem{c14} G. R. Faulhaber, â€œDesign of service systems with priority reservation,â€ in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3â€“8.
+\bibitem{c15} W. D. Doyle, â€œMagnetization reversal in films with biaxial anisotropy,â€ in 1987 Proc. INTERMAG Conf., pp. 2.2-1â€“2.2-6.
+\bibitem{c16} G. W. Juette and L. E. Zeffanella, â€œRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),â€ presented at the IEEE Summer power Meeting, Dallas, TX, June 22â€“27, 1990, Paper 90 SM 690-0 PWRS.
+\bibitem{c17} J. G. Kreifeldt, â€œAn analysis of surface-detected EMG as an amplitude-modulated noise,â€ presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
+\bibitem{c18} J. Williams, â€œNarrow-band analyzer (Thesis or Dissertation style),â€ Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993.
+\bibitem{c19} N. Kawasaki, â€œParametric study of thermal and chemical nonequilibrium nozzle flow,â€ M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
+\bibitem{c20} J. P. Wilkinson, â€œNonlinear resonant circuit devices (Patent style),â€ U.S. Patent 3 624 12, July 16, 1990.
 
 
 
