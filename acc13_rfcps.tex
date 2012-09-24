@@ -26,7 +26,7 @@
 \usepackage{graphicx} % for pdf, bitmapped graphics files
 
 \title{\LARGE \bf
-Rapid Flight Control Prototyping - Steps Toward Cooperative Mission-Oriented Capabilities}
+Rapid Flight Control Prototyping - Steps Toward Cooperative Mission-Oriented Capabilities\\ (Draft)}
 
 \author{Vladimir Dobrokhodov$^{1}$, Kevin Jones$^{2}$, and Isaac Kaminer$^{3}$% <-this % stops a space
 \thanks{$^{1}$V.N. Dobrokhodov is a Research Associate Professor at the Department  of Mechanical and Aerospace Engineering,
@@ -79,7 +79,7 @@ One of the key elements in building a reliable solution of an onboard flight con
 As a results of control prototyping and fight experimentation a number of solutions has been developed and flight tested, see the hierarchy of possible computational platforms in Fig.~\ref{fig:Platforms}. All of the developed solutions were driven by the objective of utilizing a set of high-level software tools specifically developed for the design of real-time control algorithms and their formal software verification.
 \begin{figure}[thpb]
 	\centering
-	\includegraphics[width=60mm]{Pictures/Figure_01.pdf}
+	\includegraphics[width=55mm]{Pictures/Figure_01.pdf}
 	\caption{Hierachy of computational platforms.}
 	\label{fig:Platforms}
 \end{figure}
@@ -91,10 +91,9 @@ On the other hand, the specifics of R\&D work frequently require modifications o
 The desire to focus on rapid and verifiable flight implementation of new theoretical results and well-developed legacy codes, given in a variety of programming languages, while spending less or no-time on the manual code development and re-integration resulted in targeting a new computational platform. The high efficiency of Linux operating system and high computational power of modern miniature computers lead to integrating this system into flight experimentation. Furthermore, the objectives of collaborative missions and distributed computation require integration of messaging and synchronization mechanisms that are robust to network failures and communications dropouts. A number of industrial-grade software packages that enable communication across multiple networking nodes while explicitly addressing the messaging protocols and algorithms that are resilient to faults across local and wide area networks have been recently developed~\cite{SPREAD,MOOS}. Therefore, the most recent modification of the RFCPS included the implementation of Simulink/Coder-built algorithms along with novel messaging solutions into the Linux operating system. The capabilities of Simulink to utilize communication buses and the code defining features of the Simulink coder allow generating C/C++ libraries that are directly suitable for compilation and execution on Linux. Software API of the SPREAD toolkit~\cite{SPREAD} enables efficient messaging across various tasks executed across multiple wirelessly connected UAVs. No manual modification of the auto-generated library code is necessary, however the tasks scheduling file (main) needs to explicitly define the sampling rate of each of the code components and the messaging mechanism. Special consideration is given to scheduling of the flight-critical and not critical tasks. One of the initially developed scheduling solution utilizes a simple function call to the CPU time clock. Comparing the clock time with the required execution rate enabled efficient implementation of the required sampling of various tasks (daemons) in Linux. The most recent solution that adopts the same auto-generated code and is based on more rigorous real-time scheduling capabilities of ROS/OROCOS operating system~\cite{RosOrocos,ROS} has been also tested in the USL laboratory environment.
 
 \subsection{RFCPS Architecture}
-
 To enable the desired collaborative functionality the RFCPS system representing a single UAV is  comprised of the onboard and the ground segment, see Figure~\ref{fig:RFCPS_arch} .The onboard segment is built around an autopilot that brings the basic functionality of a UAV flight to the system. The current implementation of RFCPS utilizes the Piccolo series autopilots~\cite{PiccoloAP} and the corresponding ground control station that enables simultaneous operation of multiple UAVs but does not have any cooperative mission execution functionality built-in. 
 
-\begin{figure}[h]
+\begin{figure}[thpb]
 	\centering
 	\includegraphics[width=80mm]{Pictures/Figure_02.pdf}
 	\caption{Single autonomous platform as a building block of RFCPS.}
@@ -111,17 +110,15 @@ The ground segment of RFCPS is comprised of two parts; the first part is a stand
 To preserve the rigor of theoretical development while transitioning the results to flight the core of cooperative flight control algorithms is developed utilizing advanced capabilities of the MatLab/Simulink environment. The Model Based Design (MBD) paradigm supported by a number of code verification and automatic code generation tools is what makes the transition very reliable. The algorithms are designed and verified in Simulink with minimal or no use of low-level programming. When debugged, the xPC target environment is used first to enable the Hardware In the Loop (HIL) simulation; Piccolo AP is well-supported with this functionality. Therefore, integrating and verifying the newly built algorithms becomes straightforward; at the same time a number of data processing scripts can be built ahead of time to facilitate quick flight data analysis. After confirming the desired performance of cooperative mission in HIL, the same xPC based code is transformed into real-time executable and then flown. After series of flight experiments in different flight conditions the algorithms and the operational environment mature enough to allow building a set of standalone libraries for future Linux or ROS integration. The page limitation of the paper does not allow to describe all the benefits of this new direction. However it is sufficient to note that the same development concept is  followed and the same code that is built by the Simulink coder is used to transition the flight validated solution into a highly reliable Linux/ROS based computational platform. An interested reader is referred to~\cite{RosOrocos} for mored details.
 
 \section{Experimental Results}
-
 To illustrate the benefits of RFCPS system that enable cooperative autonomous aerial missions this section  reviews two most recent projects: the coordinated road search by multiple UAVs and the onboard integration of cognitive automation system in support of dynamic mission planning and execution. Each of these experiments highlights the key benefits of the OS-based approach.
 
 \subsection{Coordinated Road Search by Multiple UAVs} 
-
-The objective of this project~\cite{CPF2UAVs} was to enable a minimally trained user to utilize a number of  sensors installed onboard of heterogeneous UAVs without any need for him to be trained in flying UAVs. The concept of operation assumes that one path is generated for a number of sensors so that when they are flown autonomously the intersection of their fields of view over the sensor path is maximized. It is assumed that sensors are complementary( for example they can be electro-optical and infrared) and might have different installation onboard of UAV; body-fixed, stabilized only in roll angle or both - roll and pitch angles. Since the sensors have different degrees of freedom and the UAVs have different flight dynamic limitations, the only method of enabling the multiple sensors to coordinate their fields of view is by enabling tight cooperation of the aerial platforms. Therefore, as soon as the sensor path is extracted by the user utilizing a digital map (scribble over the map), it is submitted onboard of airborne UAVs. The paths of each UAV and the desired nominal velocity profiles are then computed while accounting for the desired resolution of the sensors and intelligent data, the UAVs flight dynamic constraints and the gimbals limitations. The UAVs are then assigned the corresponding paths with different velocity profiles; this paths define the shape of the search segment. To execute the search the UAVs should start from their current flight state (initial conditions) and perform a coordinated arrival to the beginning of the search segment. This arrival path and the velocity profiles are calculated onboard taking into account the flight dynamics  and the collision avoidance constraints.
+The objective of this project~\cite{CPF2UAVs} was to enable a minimally trained user to utilize a number of  sensors installed onboard of heterogeneous UAVs without any need for him to be trained in flying UAVs. The concept of operation assumes that one path is generated for a number of sensors so that when they are flown autonomously the intersection of their fields of view over the sensor path is maximized. It is assumed that sensors are complementary( for example they can be electro-optical and infrared) and might have different installation onboard of UAV; body-fixed, stabilized only in roll angle or both - roll and pitch angles. Since the sensors have different degrees of freedom and the UAVs have different flight dynamic limitations, the only method of enabling the multiple sensors to coordinate their fields of view is by enabling tight cooperation of the aerial platforms. Therefore, as soon as the sensor path is extracted by the user utilizing a digital map (scribble over the map), it is submitted onboard of airborne UAVs. The paths of each UAV and the desired nominal velocity profiles are then computed while accounting for the desired resolution of the sensors, the UAVs flight dynamic constraints and the gimbals limitations. The UAVs are then assigned the corresponding paths with different velocity profiles to be followed in coordination (CPF); this paths define the shape of the road search (RS) segment. To execute the search the UAVs should start from their current flight state (initial conditions -IC) and perform a coordinated arrival to the beginning of the search segment. This arrival path and the velocity profiles are calculated onboard taking into account the flight dynamics  and the collision avoidance constraints.
 
    \begin{figure}[thpb]
       \centering
-      \framebox{\parbox{3in}{Coordinated road search by multiple UAVs.}}
-      %\includegraphics[scale=1.0]{figurefile}
+      %\framebox{\parbox{3in}{Coordinated road search by multiple UAVs.}}
+     	\includegraphics[scale=0.6]{Pictures/Figure_03.pdf}
       \caption{Coordinated road search mission}
       \label{CPF_concept}
    \end{figure}
@@ -131,7 +128,7 @@ The concept~\cite{CPF2UAVs} that is implemented by each UAV during the mission i
    \begin{figure}[thpb]
       \centering
       %\framebox{\parbox{3in}{Control architecture of the cooperative mission.}}
-      \includegraphics[width=80mm]{Pictures/Figure_04.pdf}
+      \includegraphics[width=70mm]{Pictures/Figure_04.pdf}
       \caption{Control architecture of the cooperative mission}
       \label{fig:CPF}
    \end{figure}
@@ -165,7 +162,7 @@ Flight tests were performed over three consecutive days and have consistently sh
 \subsection{Conclusion}
 The paper presented the most recent architectural modifications of the Rapid Flight Control Prototyping system that specifically address the cooperative missions of multiple unmanned aerial vehicles. The design of the RFCPS is driven by the mission level objectives and is enabled on the one hand by the progress in miniature sensors, computational power, communication and portable energy technologies and on the other hand by the advanced capabilities of embedded control and communication oriented software. As a result, the RFCPS enables rapid "prototyping of cooperative mission" of multiple UAVs that seemed impossible just a couple of years ago. 
 
-\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+\addtolength{\textheight}{-16.5cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
                                   % the textheight of the last page by a suitable amount.
                                   % This command does not take effect until the next page
@@ -176,9 +173,7 @@ The paper presented the most recent architectural modifications of the Rapid Fli
 
 \section*{ACKNOWLEDGMENT}
 
-Over the year of the RFCPS development the authors were funded in part by the National Air and Space Administration under Contracts NNX08BA64A, NNX08BA65A, NNX08AB97A, NNX08AC81A, and NNL08AA12I; ARO under Contract No.W911NF-06-1-0330, the USSOCOM/NPS Field Experimentation Cooperative, the Office of Naval Research under Contract N00014-05-1-0828. All authors received support from the USSOCOM/NPS Field Experimentation Cooperative.
-
-
+Over the years of the RFCPS development the authors were funded in part by the National Air and Space Administration under Contracts NNX08BA64A, NNX08BA65A, NNX08AB97A, NNX08AC81A, and NNL08AA12I; ARO under Contract No.W911NF-06-1-0330, the USSOCOM/NPS Field Experimentation Cooperative, the Office of Naval Research under Contract N00014-05-1-0828. All authors received support from the USSOCOM/NPS Field Experimentation Cooperative.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -190,8 +185,8 @@ Over the year of the RFCPS development the authors were funded in part by the Na
 \bibitem{Simulink} MathWork's Simulink, http://www.mathworks.com/products/simulink/, last accessed on September 20th, 2012.
 \bibitem{SimCoder} MathWork's Simulink Coder, http://www.mathworks.com/products/simulink-coder/index.html, last accessed on September 20th, 2012.
 \bibitem{SLUGap09} M., Lizarraga, G.H., Elkaim, G., Horn, R., Curry, V.N., Dobrokhodov, I.I., Kaminer, Low Cost Rapidly Reconfigurable UAV Autopilot for Research and Development of Guidance, Navigation and Control Algorithms, in proceedings of ASME/IEEE MESA09, International Conference on Mechatronic and Embedded Systems and Applications, San Diego, August, 2009.
-\bibitem{SLUGarch2011} M., Lizarraga, R., Curry, G.H., Elkaim, reprogrammable UAV Autopilot System (Part 1) - System Hardware and Software, in Circuit Cellar, Issue 249, April 2011.
-\bibitem{SLUGtest2011} M., Lizarraga, R., Curry, G.H., Elkaim, reprogrammable UAV Autopilot System (Part 1) - testing and Results, in Circuit Cellar, Issue 250, May 2011.
+\bibitem{SLUGarch2011} M., Lizarraga, R., Curry, G.H., Elkaim, Reprogrammable UAV Autopilot System (Part 1) - System Hardware and Software, in Circuit Cellar, Issue 249, April 2011.
+\bibitem{SLUGtest2011} M., Lizarraga, R., Curry, G.H., Elkaim, Reprogrammable UAV Autopilot System (Part 1) - testing and Results, in Circuit Cellar, Issue 250, May 2011.
 \bibitem{SPREAD} The Spread Toolkit, http://www.spread.org, last accessed on September 20th, 2012.
 \bibitem{MOOS} The MOOS Cross Platform Software for Robotics Research, http://www.robots.ox.ac.uk/~mobile/MOOS/wiki/pmwiki.php/Main/HomePage, last accessed on September 20th, 2012.
 \bibitem{RosOrocos} The OROCOS Project, Smarter Control in Robotics and Automation, http://www.orocos.org/node/1117, last accessed on September 20th, 2012.
