@@ -13,7 +13,7 @@
 \overrideIEEEmargins
 % See the \addtolength command later in the file to balance the column lengths
 % on the last page of the document
-\newcommand{\squeezeup}{\vspace{-2mm}}
+\newcommand{\squeezeup}{\vspace{-3.5mm}}
 
 
 % The following packages can be found on http:\\www.ctan.org
@@ -29,21 +29,15 @@
 Rapid Flight Control Prototyping - Steps Toward Cooperative Mission-Oriented Capabilities}
 
 \author{Vladimir Dobrokhodov$^{1}$, Kevin Jones$^{2}$, and Isaac Kaminer$^{3}$% <-this % stops a space
-\thanks{$^{1}$V.N. Dobrokhodov is a Research Associate Professor at the Department  of Mechanical and Aerospace Engineering,
+\thanks{$^{1}$V.N. Dobrokhodov and $^{2}$K.D. Jones are Research Associate Professors at the Department  of Mechanical and Aerospace Engineering,
         Naval Postgraduate School, Monterey, CA, 93943
-        {\tt\small vldobr@nps.edu}}%
-\thanks{$^{2}$K.D. Jones is a Research Associate Professor at the Department  of Mechanical and Aerospace Engineering,
-        Naval Postgraduate School, Monterey, CA, 93943
-        {\tt\small jones@nps.edu}}%
+        {\tt\small vldobr//kdjones@nps.edu}}%
 \thanks{$^{2}$I.I. Kaminer is a Professor at the Department  of Mechanical and Aerospace Engineering,
         Naval Postgraduate School, Monterey, CA, 93943
         {\tt\small kaminer@nps.edu}}%
 }
 
-
 \begin{document}
-
-
 
 \maketitle
 \thispagestyle{empty}
@@ -80,7 +74,7 @@ As a results of RFCPS evolution that includes control prototyping and fight expe
 
 \begin{figure}[thpb]
 	\centering
-	\includegraphics[width=50mm]{Pictures/Figure_01.pdf}
+	\includegraphics[width=60mm]{Pictures/Figure_001.pdf}
 	\caption{Hierachy of computational platforms.}
 	\label{fig:Platforms}
 \end{figure}
@@ -113,13 +107,15 @@ To illustrate the benefits of RFCPS system that enable cooperative autonomous ae
 
 \subsection{Coordinated Road Search by Multiple UAVs} 
 The objective of this project~\cite{CPF2UAVs} was to enable a minimally trained user to utilize a number of  sensors installed onboard of heterogeneous UAVs without any need for him to be trained in flying UAVs. The concept of operation assumes that one path is generated for a number of sensors so that when they are flown autonomously the intersection of their fields of view over the sensor path is maximized. It is assumed that sensors are complementary( for example they can be electro-optical and infrared) and might have different installation onboard of UAV; body-fixed, stabilized only in roll angle or both - roll and pitch angles. Since the sensors have different degrees of freedom and the UAVs have different flight dynamic limitations, the only method of enabling the multiple sensors to coordinate their fields of view is by enabling tight cooperation of the aerial platforms. Therefore, as soon as the sensor path is extracted by the user utilizing a digital map (scribble over the map), it is submitted onboard of airborne UAVs, see Fig.~\ref{fig:CPF_concept}. 
+
    \begin{figure}[thpb]
       \centering
      	\includegraphics[scale=0.5]{Pictures/Figure_03.pdf}
       \caption{Coordinated road search mission}
-      \label{CPF_concept}
+      \label{fig:CPF_concept}
    \end{figure}
 \squeezeup
+
 The paths of each UAV and the desired nominal velocity profiles are then computed while accounting for the required resolution of the sensors, the UAVs flight dynamic constraints and the gimbals limitations. The UAVs are then assigned the corresponding paths with different velocity profiles to be followed in coordination (CPF); this paths define the shape of the road search (RS) segment. To execute the search the UAVs should start from their current flight state (initial conditions-IC) and perform a coordinated arrival to the beginning of the search segment. This arrival path and the velocity profiles are calculated onboard taking into account the flight dynamics  and the collision avoidance constraints.
 
 The control~\cite{CPF2UAVs} that is implemented by each UAV during the mission is based on the explicit separation of time and space. The  path is parameterized by algebraic polynomials, therefore the number of parameters defining the path is finite and depends on the class and the degree of the chosen polynomial representation. Supported by robust communication protocols this approach enables feasible real-time execution, path generation and simple and inexpensive communication of the intent and current state of each UAV that is critical especially for the collision avoidance, see Fig.~\ref{fig:CPF}.
@@ -149,7 +145,6 @@ Figure~\ref{fig:CAP_mission} presents the mission progress during the CoCAMPUS f
 
    \begin{figure}[thpb]
       \centering
-      %\framebox{\parbox{3in}{Control architecture of the cooperative mission.}}
       \includegraphics[width=85mm]{Pictures/CAP_mission.pdf}
       \caption{Air-Attack mission results with overlaid tactical elements.}
       \label{fig:CAP_mission}
@@ -183,16 +178,16 @@ Evolution of RFCPS system has been funded in part by the National Air and Space 
 \bibitem{SOTECH2012} H., Canaday, UAV Payload Systems, in Special Operations Technology, Vol.10, Issue 6, 2012.
 \bibitem{DefInd2010} ``Too Much Information: Taming the UAV Data Explosion,'' in Defense Industry Daily, May 16, 2010.
 \bibitem{Stevens08} R.C., Stevens, S.A., Firooz, J.R., Braegelmann, A.M., Cordes, R.L., Nelson, Small unmanned aerial vehicle (UAV) real-time intelligence, surveillance, and reconnaissance (ISR) using onboard pre-processing, in proceedings  of the XVIII SPIE Congress on Automatic Target Recognition, vol. 6967, pp. 696717-696717-8, 2008.
-\bibitem{Simulink} MathWork's Simulink/Coder, http://www.mathworks.com/ products/simulink/, last accessed on September 20th, 2012.
+\bibitem{Simulink} MathWork's Simulink/Coder, http://www.mathworks.com/ products/simulink/, last accessed on 09/20/12.
 \bibitem{SLUGap09} M., Lizarraga, G.H., Elkaim, G., Horn, R., Curry, V.N., Dobrokhodov, I.I., Kaminer, Low Cost Rapidly Reconfigurable UAV Autopilot for Research and Development of Guidance, Navigation and Control Algorithms, in proceedings of ASME/IEEE MESA09, International Conference on Mechatronic and Embedded Systems and Applications, San Diego, August, 2009.
 \bibitem{SLUGarch2011} M., Lizarraga, R., Curry, G.H., Elkaim, Reprogrammable UAV Autopilot System (Part 1) - System Hardware and Software, in Circuit Cellar, Issue 249, April 2011.
 \bibitem{SLUGtest2011} M., Lizarraga, R., Curry, G.H., Elkaim, Reprogrammable UAV Autopilot System (Part 1) - testing and Results, in Circuit Cellar, Issue 250, May 2011.
-\bibitem{SPREAD} The Spread Toolkit, http://www.spread.org, last accessed on September 20th, 2012.
-\bibitem{MOOS} The MOOS Cross Platform Software, http://www.robots.ox.ac.uk/~mobile/MOOS/wiki/pmwiki.php/Main/HomePage, last accessed on September 20th, 2012.
-\bibitem{RosOrocos} The OROCOS Project, http://www.orocos.org/node/1117, last accessed on September 20th, 2012.
-\bibitem{ROS} Robotic Operating System, http://www.ros.org, last accessed on September 20th, 2012.
-\bibitem{PiccoloAP} Piccolo Autopilots, http://www.cloudcaptech.com, last accessed on September 20th, 2012.
-\bibitem{DobrLizzr05} V.N., Dobrokhodov, M., Lizarraga, Developing Serial Communication Interfaces for Rapid Prototyping of Navigation and Control Tasks, in proceedings of AIAA Modeling and Simulation Technologies Conference and Exhibit, pp13, 2005.\bibitem{Ubuntu} UBUNTU Operating System, http://www.ubuntu.com, last accessed on September 20th, 2012.
+\bibitem{SPREAD} The Spread Toolkit, http://www.spread.org, last accessed on 09/20/12.
+\bibitem{MOOS} The MOOS Software, http://www.robots.ox.ac.uk/, last accessed on 09/20/12.
+\bibitem{RosOrocos} The OROCOS Project, http://www.orocos.org, last accessed on 09/20/12.
+\bibitem{ROS} Robotic Operating System, http://www.ros.org, last accessed on 09/20/12.
+\bibitem{PiccoloAP} Piccolo Autopilots, http://www.cloudcaptech.com, last accessed on 09/20/12.
+\bibitem{DobrLizzr05} V.N., Dobrokhodov, M., Lizarraga, Developing Serial Communication Interfaces for Rapid Prototyping of Navigation and Control Tasks, in proceedings of AIAA Modeling and Simulation Technologies Conference and Exhibit, pp13, 2005.\bibitem{Ubuntu} UBUNTU Operating System, http://www.ubuntu.com, last accessed on 09/20/12.
 \bibitem{KlassGlider} K., Andersson, K.D., Jones, V.N., Dobrokhodov, I.I., Kaminer, Thermal Highs and Pitfall Lows. Notes on the Journey to the First Cooperative Autonomous Soaring Flight, 51st IEEE Conference on Decision and Control, Maui, Hawaii, December 10-13, 2012.
 \bibitem{CPF2UAVs} E., Xargay, V.N., Dobrokhodov, I.I., Kaminer, A.M., Pascoal, N., Hovakimyan, and C., Cao, ÒTimeÐCoordinated Path Following of Multiple Heterogeneous Vehicles over TimeÐVarying Networks,Ó  IEEE Control Systems Magazine, Special Issue on UAVs and Controls, 2012.
 \bibitem{L1CPF} I.I., Kaminer, A.M., Pascoal, E., Xargay, C. Cao, N., Hovakimyan, V.N., Dobrokhodov, Ò3D Path Following for Small UAVs using Commercial Autopilots augmented by L1 Adaptive Control,Ó Journal of Guidance, Control, and Dynamics, N 0731-5090 vol.33 no.2 (550-564) 2010.
